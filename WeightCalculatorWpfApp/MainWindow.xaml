@@ -1,0 +1,67 @@
+﻿<Window x:Class="WeightCalculatorWpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525"
+        x:Name="PageRoot">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="10"
+                    >
+            <TextBlock Text="Age"
+                       HorizontalAlignment="Center"/>
+            <TextBox x:Name="AgeTextBox"
+                         DataObject.Pasting="TextBoxPasting"
+                         PreviewTextInput="PreviewTextInput" 
+                         MinWidth="200"></TextBox>
+            <TextBlock Text="Height"
+                       HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBox x:Name="HeighTextBox"
+                         DataObject.Pasting="TextBoxPasting"
+                         PreviewTextInput="PreviewTextInput" 
+                         MinWidth="200"></TextBox>
+                <ComboBox></ComboBox>
+            </StackPanel>
+            <TextBlock Text="Weight"
+                       HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBox x:Name="WeighTextBox"
+                         DataObject.Pasting="TextBoxPasting"
+                         PreviewTextInput="PreviewTextInput" 
+                         MinWidth="200"
+                         Text="{Binding CurrentPersonData.Weight,Mode=TwoWay}"></TextBox>
+                <ComboBox></ComboBox>
+            </StackPanel>
+            
+            <TextBlock Text="Dress"
+                       HorizontalAlignment="Center"/>
+            <!--<ComboBox x:Name="DressSelectorComboBox"
+                      IsEditable="False"
+                      >
+                
+            </ComboBox>-->
+            <ContentControl Content="{Binding Dresses}">
+                <ContentControl.ContentTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <ComboBox x:Name="cb" ItemsSource="{Binding }"
+                                      SelectedItem="{Binding ElementName=PageRoot,Path=DataContext.SelectedDress,Mode=TwoWay}"/>
+                            <TextBlock x:Name="tb" Text="Select Dress" 
+                                       IsHitTestVisible="False" Visibility="Hidden"
+                                       HorizontalAlignment="Center" 
+                                       Margin="0,3,0,0"/>
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <Trigger SourceName="cb" Property="SelectedItem" Value="{x:Null}">
+                                <Setter TargetName="tb" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ContentControl.ContentTemplate>
+            </ContentControl>
+        </StackPanel>
+    </Grid>
+</Window>

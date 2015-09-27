@@ -1,0 +1,16 @@
+power point er design ta just concept deyar jonne
+first page er moto open hobe application ta.okhane click or tab or enter e press korle 2nd page ashbe
+okhane Height, age, weight and dress deyar option thakbe
+Power point is not perfect
+height CM and Inches dui vabei dite parbe. 
+Height er box er pashe ekta drop down menu dite hobe etar jonne.
+ Jekhane menu te CM or inches select kora jabeweight o lb and kg te deya jabe
+Height, weight, age and dress deyar por image er chart er moto kore calculate kore bolte hobe koto kg under weight or over weight ace
+Dress drop down menu hobe.For dress.. options are.
+
+1. Cbt Uniform
+2. Games dress
+
+Cbt uniform er jonno 3 kg or 7 lbs minus hobe
+Games dress er jonno 1 kg or 2 lbs minus hobe"Cbt uniform er jonno 3 kg or 7 lbs minus hobe
+Games dress er jonno 1 kg or 2 lbs minus hobe " - Ei dui line logic.Erpor button thakbe show weight name ebutton click er pore power point er third page ta ashbe
