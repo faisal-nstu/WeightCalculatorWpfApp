@@ -60,5 +60,11 @@ namespace WeightCalculatorWpfApp
         {
             _viewModel.Calculate();
         }
+
+        private void TextBox_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            var txtBx = sender as TextBox;
+            txtBx.Select(0,txtBx.Text.Length);
+        }
     }
 }

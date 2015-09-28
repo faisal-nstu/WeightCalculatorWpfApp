@@ -16,7 +16,8 @@
                          DataObject.Pasting="TextBoxPasting"
                          PreviewTextInput="PreviewTextInput" 
                          MinWidth="200"
-                         Text="{Binding CurrentPersonData.Age,Mode=TwoWay}"></TextBox>
+                         Text="{Binding CurrentPersonData.Age,Mode=TwoWay}"
+                         GotFocus="TextBox_OnGotFocus"></TextBox>
                 <TextBlock Text="yrs" 
                            Margin="5,0,0,0"/>
             </StackPanel>
@@ -28,7 +29,8 @@
                          DataObject.Pasting="TextBoxPasting"
                          PreviewTextInput="PreviewTextInput" 
                          MinWidth="200"
-                         Text="{Binding CurrentPersonData.Height,Mode=TwoWay}"></TextBox>
+                         Text="{Binding CurrentPersonData.Height,Mode=TwoWay}"
+                         GotFocus="TextBox_OnGotFocus"></TextBox>
                 <ComboBox ItemsSource="{Binding HeightUnits,Mode=TwoWay}"
                           SelectedItem="{Binding SelectedHeightUnit,Mode=TwoWay}"
                           Margin="5,0,0,0"/>
@@ -41,7 +43,8 @@
                          DataObject.Pasting="TextBoxPasting"
                          PreviewTextInput="PreviewTextInput" 
                          MinWidth="200"
-                         Text="{Binding CurrentPersonData.Weight,Mode=TwoWay}"></TextBox>
+                         Text="{Binding CurrentPersonData.Weight,Mode=TwoWay}"
+                         GotFocus="TextBox_OnGotFocus"></TextBox>
                 <ComboBox ItemsSource="{Binding WeightUnits,Mode=TwoWay}"
                           SelectedItem="{Binding SelectedWeightUnit,Mode=TwoWay}"
                           Margin="5,0,0,0"/>
@@ -49,11 +52,6 @@
             
             <TextBlock Text="Dress"
                        HorizontalAlignment="Center"/>
-            <!--<ComboBox x:Name="DressSelectorComboBox"
-                      IsEditable="False"
-                      >
-                
-            </ComboBox>-->
             <ContentControl Content="{Binding Dresses}">
                 <ContentControl.ContentTemplate>
                     <DataTemplate>

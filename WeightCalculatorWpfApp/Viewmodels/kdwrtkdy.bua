@@ -74,19 +74,18 @@ namespace WeightCalculatorWpfApp.Viewmodels
             double dressDeductedWeightLb = SelectedDress == Dresses[0] ? CurrentPersonData.Weight - 7 : CurrentPersonData.Weight - 2;
             int rowIndex = 0;
             rowIndex = GetRowIndex();
-            //MessageBox.Show(rowIndex.ToString());
-            //return;
+
             if (CheckIfUnderweight(rowIndex, dressDeductedWeightKg,dressDeductedWeightLb)) return;
             idealWeight = GetWeightDifference(rowIndex);
             double differenceFromIdeal = SelectedWeightUnit == "kg"
                 ? idealWeight - dressDeductedWeightKg
                 : idealWeight - dressDeductedWeightLb;
 
-            if (differenceFromIdeal < 0)
+            if (differenceFromIdeal > 0)
             {
                 MessageBox.Show(differenceFromIdeal +" "+ SelectedWeightUnit + " OVERWEIGHT");
             }
-            else if (differenceFromIdeal > 0)
+            else if (differenceFromIdeal < 0)
             {
                 //MessageBox.Show((differenceFromIdeal *(-1)) + " " + SelectedWeightUnit + "UNDERWEIGHT");
             }
@@ -196,17 +195,18 @@ namespace WeightCalculatorWpfApp.Viewmodels
             {
                 for (int i = 0; i < _heightsCm.Count; i++)
                 {
-                    if (i == _heightsCm.Count - 1)
+                    if ((_heightsCm.Count-1) != i)
                     {
-                        if (CurrentPersonData.Height >= _heightsCm[i])
+                        if (CurrentPersonData.Height <= _heightsCm[i + 1] && CurrentPersonData.Height > _heightsCm[i])
                         {
                             rowIndex = i;
                             break;
                         }
                     }
+
                     else
                     {
-                        if (CurrentPersonData.Height >= _heightsCm[i] && CurrentPersonData.Height < _heightsCm[i + 1])
+                        if (CurrentPersonData.Height >= _heightsCm[i])
                         {
                             rowIndex = i;
                             break;
