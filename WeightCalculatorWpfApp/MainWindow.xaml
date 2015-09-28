@@ -10,10 +10,16 @@
                     >
             <TextBlock Text="Age"
                        HorizontalAlignment="Center"/>
-            <TextBox x:Name="AgeTextBox"
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Stretch">
+                <TextBox x:Name="AgeTextBox"
                          DataObject.Pasting="TextBoxPasting"
                          PreviewTextInput="PreviewTextInput" 
-                         MinWidth="200"></TextBox>
+                         MinWidth="200"
+                         Text="{Binding CurrentPersonData.Age,Mode=TwoWay}"></TextBox>
+                <TextBlock Text="yrs" 
+                           Margin="5,0,0,0"/>
+            </StackPanel>
             <TextBlock Text="Height"
                        HorizontalAlignment="Center"/>
             <StackPanel Orientation="Horizontal"
@@ -21,8 +27,11 @@
                 <TextBox x:Name="HeighTextBox"
                          DataObject.Pasting="TextBoxPasting"
                          PreviewTextInput="PreviewTextInput" 
-                         MinWidth="200"></TextBox>
-                <ComboBox></ComboBox>
+                         MinWidth="200"
+                         Text="{Binding CurrentPersonData.Height,Mode=TwoWay}"></TextBox>
+                <ComboBox ItemsSource="{Binding HeightUnits,Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedHeightUnit,Mode=TwoWay}"
+                          Margin="5,0,0,0"/>
             </StackPanel>
             <TextBlock Text="Weight"
                        HorizontalAlignment="Center"/>
@@ -33,7 +42,9 @@
                          PreviewTextInput="PreviewTextInput" 
                          MinWidth="200"
                          Text="{Binding CurrentPersonData.Weight,Mode=TwoWay}"></TextBox>
-                <ComboBox></ComboBox>
+                <ComboBox ItemsSource="{Binding WeightUnits,Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedWeightUnit,Mode=TwoWay}"
+                          Margin="5,0,0,0"/>
             </StackPanel>
             
             <TextBlock Text="Dress"
@@ -48,7 +59,8 @@
                     <DataTemplate>
                         <Grid>
                             <ComboBox x:Name="cb" ItemsSource="{Binding }"
-                                      SelectedItem="{Binding ElementName=PageRoot,Path=DataContext.SelectedDress,Mode=TwoWay}"/>
+                                      SelectedItem="{Binding ElementName=PageRoot,Path=DataContext.SelectedDress,Mode=TwoWay}"
+                                      HorizontalContentAlignment="Center"/>
                             <TextBlock x:Name="tb" Text="Select Dress" 
                                        IsHitTestVisible="False" Visibility="Hidden"
                                        HorizontalAlignment="Center" 
@@ -62,6 +74,10 @@
                     </DataTemplate>
                 </ContentControl.ContentTemplate>
             </ContentControl>
+            <Button Content="Show Weight →"
+                    Margin="0,10,0,0"
+                    x:Name="CalculateButton"
+                    Click="CalculateButton_OnClick"></Button>
         </StackPanel>
     </Grid>
 </Window>

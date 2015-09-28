@@ -21,11 +21,13 @@ namespace WeightCalculatorWpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainViewViewModel _viewModel = new MainViewViewModel();
         public MainWindow()
         {
             InitializeComponent();
-            var viewModel = new MainViewViewModel();
-            this.DataContext = viewModel;
+            _viewModel = new MainViewViewModel();
+            _viewModel.InitForm();
+            this.DataContext = _viewModel;
         }
 
         private void TextBoxPasting(object sender, DataObjectPastingEventArgs e)
@@ -52,6 +54,11 @@ namespace WeightCalculatorWpfApp
         private void PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        private void CalculateButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            _viewModel.Calculate();
         }
     }
 }
