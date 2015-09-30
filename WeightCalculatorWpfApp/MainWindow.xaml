@@ -10,17 +10,27 @@
                     >
             <TextBlock Text="Age"
                        HorizontalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Stretch">
-                <TextBox x:Name="AgeTextBox"
-                         DataObject.Pasting="TextBoxPasting"
-                         PreviewTextInput="PreviewTextInput" 
-                         MinWidth="200"
-                         Text="{Binding CurrentPersonData.Age,Mode=TwoWay}"
-                         GotFocus="TextBox_OnGotFocus"></TextBox>
-                <TextBlock Text="yrs" 
-                           Margin="5,0,0,0"/>
-            </StackPanel>
+            <ContentControl Content="{Binding AgeGroups}">
+                <ContentControl.ContentTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <ComboBox x:Name="cb" ItemsSource="{Binding }"
+                                      SelectedItem="{Binding ElementName=PageRoot,Path=DataContext.CurrentPersonData.AgeGroup,Mode=TwoWay}"
+                                      HorizontalContentAlignment="Center"/>
+                            <TextBlock x:Name="tb" Text="-- Select Age --" 
+                                       IsHitTestVisible="False" Visibility="Hidden"
+                                       HorizontalAlignment="Center" 
+                                       Margin="0,3,0,0"
+                                       Foreground="Gray"/>
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <Trigger SourceName="cb" Property="SelectedItem" Value="{x:Null}">
+                                <Setter TargetName="tb" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ContentControl.ContentTemplate>
+            </ContentControl>
             <TextBlock Text="Height"
                        HorizontalAlignment="Center"/>
             <StackPanel Orientation="Horizontal"
@@ -59,10 +69,11 @@
                             <ComboBox x:Name="cb" ItemsSource="{Binding }"
                                       SelectedItem="{Binding ElementName=PageRoot,Path=DataContext.SelectedDress,Mode=TwoWay}"
                                       HorizontalContentAlignment="Center"/>
-                            <TextBlock x:Name="tb" Text="Select Dress" 
+                            <TextBlock x:Name="tb" Text="-- Select Dress --" 
                                        IsHitTestVisible="False" Visibility="Hidden"
                                        HorizontalAlignment="Center" 
-                                       Margin="0,3,0,0"/>
+                                       Margin="0,3,0,0"
+                                       Foreground="Gray"/>
                         </Grid>
                         <DataTemplate.Triggers>
                             <Trigger SourceName="cb" Property="SelectedItem" Value="{x:Null}">

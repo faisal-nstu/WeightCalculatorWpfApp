@@ -27,7 +27,9 @@ namespace WeightCalculatorWpfApp.Viewmodels
         public ObservableCollection<string> Dresses { get; set; }
         public ObservableCollection<string> WeightUnits { get; set; }
         public ObservableCollection<string> HeightUnits { get; set; }
+        public ObservableCollection<string> AgeGroups { get; set; }
         public string SelectedDress { get; set; }
+        public string SelectedAgeGroup { get; set; }
         public string SelectedHeightUnit { get; set; }
         public string SelectedWeightUnit { get; set; }
 
@@ -47,6 +49,9 @@ namespace WeightCalculatorWpfApp.Viewmodels
             var heightUnitList = new List<string>() {"in","cm"};
             HeightUnits = new ObservableCollection<string>(heightUnitList);
             SelectedHeightUnit = HeightUnits.FirstOrDefault();
+            //var ageGroups = new List<string>() { "Upto 30 yrs", "31 - 40 yrs", "41 - 50 yrs", "Over 50 yrs" };
+            var ageGroups = new List<string>(){AgeGroup.Upto30Yrs,AgeGroup.Upto40Yrs,AgeGroup.Upto50Yrs,AgeGroup.Over50Yrs};
+            AgeGroups = new ObservableCollection<string>(ageGroups);
 
             _heightsCm = new List<double>() { 157.5, 160.0, 162.5, 165.0, 167.5, 170.0, 172.5, 175.0, 177.5, 180.0, 182.5, 185.0, 187.5 };
             _heightsInch = new List<double>() { 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74 };
@@ -82,13 +87,13 @@ namespace WeightCalculatorWpfApp.Viewmodels
                 ? idealWeight - dressDeductedWeightKg
                 : idealWeight - dressDeductedWeightLb;
 
-            if (differenceFromIdeal < 0)
+            if (differenceFromIdeal > 0)
             {
-                MessageBox.Show(differenceFromIdeal +" "+ SelectedWeightUnit + " OVERWEIGHT");
+                MessageBox.Show(differenceFromIdeal +" "+ SelectedWeightUnit + " UNDERWEIGHT");
             }
-            else if (differenceFromIdeal > 0)
+            else if (differenceFromIdeal < 0)
             {
-                //MessageBox.Show((differenceFromIdeal *(-1)) + " " + SelectedWeightUnit + "UNDERWEIGHT");
+                MessageBox.Show((differenceFromIdeal *(-1)) + " " + SelectedWeightUnit + " OVERWEIGHT");
             }
             else
             {
@@ -99,7 +104,7 @@ namespace WeightCalculatorWpfApp.Viewmodels
         private double GetWeightDifference(int rowIndex)
         {
             double idealWeight = 0;
-            if (CurrentPersonData.Age <= 30)
+            if (CurrentPersonData.AgeGroup == AgeGroup.Upto30Yrs)
             {
                 if (SelectedWeightUnit.ToLower() == "kg")
                 {
@@ -110,7 +115,7 @@ namespace WeightCalculatorWpfApp.Viewmodels
                     idealWeight = _upto30MaxWeightLb[rowIndex];
                 }
             }
-            if (CurrentPersonData.Age <= 40 && CurrentPersonData.Age > 30)
+            if (CurrentPersonData.AgeGroup == AgeGroup.Upto40Yrs)
             {
                 if (SelectedWeightUnit.ToLower() == "kg")
                 {
@@ -120,9 +125,8 @@ namespace WeightCalculatorWpfApp.Viewmodels
                 {
                     idealWeight = _upto40MaxWeightLb[rowIndex];
                 }
-                MessageBox.Show(idealWeight - CurrentPersonData.Weight + " kg +/-");
             }
-            if (CurrentPersonData.Age <= 50 && CurrentPersonData.Age > 40)
+            if (CurrentPersonData.AgeGroup == AgeGroup.Upto50Yrs)
             {
                 if (SelectedWeightUnit.ToLower() == "kg")
                 {
@@ -133,7 +137,7 @@ namespace WeightCalculatorWpfApp.Viewmodels
                     idealWeight = _upto50MaxWeightLb[rowIndex];
                 }
             }
-            if (CurrentPersonData.Age > 50)
+            if (CurrentPersonData.AgeGroup == AgeGroup.Over50Yrs)
             {
                 if (SelectedWeightUnit.ToLower() == "kg")
                 {
